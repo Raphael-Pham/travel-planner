@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Trip(models.Model):
-    # ! add field to link a trip to a user or multiple users once shared
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    users = models.ManyToManyField("users.CustomUser", related_name="trips")
 
     def __str__(self):
         return self.name
